@@ -1,0 +1,111 @@
+
+<mat-card class="mt-3">
+  <mat-card-header fxLayoutAlign="center center">
+      <mat-card-title class="uppercase">{{application?.property.title}}</mat-card-title>
+  </mat-card-header>
+  <mat-card-content fxLayoutAlign="center center">
+      <p class='cStatus' >{{status(application?.status)}}</p>
+  </mat-card-content>
+</mat-card>
+
+<img fxLayoutAlign="center center" [src]="application?.property.gallery[0].small" [style.width.px]="1100" class="mw-100">
+
+<div *ngIf="application?.status === 0"> 
+
+  <mat-card class="mt-3" fxLayout="row wrap" fxLayoutAlign="space-between center">
+    <span>Content:<span class="fw-500 mx-2">{{application?.content}}</span></span>
+  </mat-card>
+
+  <mat-card class="mt-3" fxLayout="row wrap" fxLayoutAlign="space-between center">
+    <span>Address:<span class="fw-500 mx-2">{{application?.address}}</span></span>
+    <span>City:<span class="fw-500 mx-2">{{application?.city}}</span></span>
+    <span>State:<span class="fw-500 mx-2">{{application?.state}}</span></span>
+    <span>Zip:<span class="fw-500 mx-2">{{application?.zip}}</span></span> 
+  </mat-card>
+  
+  <mat-card class="mt-3" fxLayout="row wrap" fxLayoutAlign="space-between center">
+    <span>How long live:<span class="fw-500 mx-2">{{application?.how_long_live}}</span></span>
+    <span>Phone number:<span class="fw-500 mx-2">{{application?.phone_number}}</span></span>
+    <span>Email:<span class="fw-500 mx-2">{{application?.email}}</span></span>
+    <span>Period:<span class="fw-500 mx-2">{{application?.period}}</span></span> 
+    
+  </mat-card>
+  
+  <mat-card class="mt-3" fxLayout="row wrap" fxLayoutAlign="space-between center">
+    <span>Job:<span class="fw-500 mx-2">{{application?.job}}</span></span>
+    <span>Job City:<span class="fw-500 mx-2">{{application?.job_city}}</span></span> 
+    <span>Monthly Income:<span class="fw-500 mx-2">{{application?.monthly_income}}</span></span>
+    <span>Job State:<span class="fw-500 mx-2">{{application?.job_state}}</span></span>
+  </mat-card>
+  
+  <mat-card class="mt-3" fxLayout="row wrap" fxLayoutAlign="space-between center">
+    <span>How long work:<span class="fw-500 mx-2">{{application?.how_long_work}}</span></span>
+    <span>Pet:<span class="fw-500 mx-2">{{application?.pet}}</span></span>
+    <span>Pet Count:<span class="fw-500 mx-2">{{application?.pet_count}}</span></span>
+    <span>Sign:<span class="fw-500 mx-2">{{application?.sign}}</span></span>
+  </mat-card>
+
+</div>
+
+
+<div *ngIf="application?.status === 2"> 
+  
+  <mat-card class="mt-3" fxLayout="row wrap" fxLayoutAlign="space-between center" >
+
+    <span>Reason:<span class="fw-500 mx-2">  {{application?.reject_reason}}</span></span>
+  
+  </mat-card>
+</div>
+
+<div [hidden]="application?.status !== 1"> 
+    <mat-card class="mt-3" fxLayout="row wrap" fxLayouAlign="space-between center">
+      <div class="">
+        <div class="text-center" class="">
+          <form [formGroup]="paymentForm" class="d-flex" [action]='paymentSubmitUrl' method='post' [hidden]='application?.contract?.recurring === 1'>
+            <input type="hidden" name="authtoken" [value]="appService.currentUserValue.token" />
+            <input type="hidden" name="property_id" [value]="application?.property_id" />
+            <div>
+              <div #paymentScript></div>
+            </div>
+            <mat-checkbox name="recurring" class="ml-2">Recurring</mat-checkbox>
+          </form>
+          <div *ngIf='application?.contract?.recurring == 1'>Recurring payment</div>
+        </div>
+      </div>
+    </mat-card>
+    <mat-card class="mt-3" fxLayout="row wrap" fxLayoutAlign="space-between center">
+      <span>Content:<span class="fw-500 mx-2">{{application?.content}}</span></span>
+    </mat-card>
+    <mat-card class="mt-3" fxLayout="row wrap" fxLayoutAlign="space-between center">
+      <span>Period:<span class="fw-500 mx-2">{{application?.period}}</span></span>
+      <span>Type:<span class="fw-500 mx-2">{{application?.contract?.type}}</span></span>
+      <span>Status:<span class="fw-500 mx-2">{{status(application?.status)}}</span></span>
+      <span>Contract Date:<span class="fw-500 mx-2">{{application?.contract?.created_at}}</span></span> 
+    </mat-card>
+
+    <div class="table-wrapper" > 
+      <table mat-table [dataSource]="dataSource" matSort class="w-100">
+    
+        <ng-container matColumnDef="id">
+          <th mat-header-cell *matHeaderCellDef mat-sort-header> No </th>
+          <td mat-cell *matCellDef="let history; let i = index"> {{i + 1}} </td>
+        </ng-container>  
+
+        <ng-container matColumnDef="paid_amount">
+          <th mat-header-cell *matHeaderCellDef> Paid Amount </th>
+          <td mat-cell *matCellDef="let history">{{ history.paid_amount }} $</td>
+        </ng-container>
+
+        <ng-container matColumnDef="created_at">
+          <th mat-header-cell *matHeaderCellDef> Time </th> 
+          <td mat-cell *matCellDef="let history">{{ history.created_at }}</td>
+        </ng-container> 
+    
+        <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+        <tr mat-row *matRowDef="let application; columns: displayedColumns;">
+        </tr>
+      </table> 
+      <p *ngIf="dataSource?.data.length === 0" class="py-5 mb-0 text-center">No data available</p> 
+   </div>
+   <mat-paginator [pageSizeOptions]="[5, 10, 25, 100]" showFirstLastButtons></mat-paginator>
+</div>

@@ -1,0 +1,6 @@
+{"menu": [
+
+    {"url":"/users", "name":"Users", "icon":"feather icon-users", "i18n":"nav.users"},
+    {"url":"/companies", "name":"Companies", "icon":"feather icon-briefcase", "i18n":"nav.company"}
+]}
+

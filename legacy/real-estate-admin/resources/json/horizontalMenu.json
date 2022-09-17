@@ -1,0 +1,13 @@
+{"menu": [
+  {"url":"dashboard-analytics", "name":"Dashboard", "slug":"dashboard", "icon":"feather icon-home", "i18n":"Dashboard"},
+  {"url":"users", "name":"Users", "slug":"users", "icon":"feather icon-users", "i18n":"Users"},
+  {"url":"#","name":"Starter kit","slug":"starter kit","icon":"feather icon-zap", "i18n":"Starter kit", "dropdown":"1",
+    "submenu":[
+      {"url":"#","name":"Third Level","i18n":"Third Level","icon":"feather icon-circle","slug":""},
+      {"url":"#","name":"Third Level","i18n":"Third Level","icon":"feather icon-circle","slug":""}
+    ]
+  },
+  {"url":"" ,"name":"Disabled Menu", "i18n":"Disabled Menu" ,"icon":"feather icon-eye-off","slug":"", "classlist":"disabled"},
+  {"url":"https://pixinvent.com/demo/vuexy-html-bootstrap-admin-template/documentation/documentation-laravel.html","name":"Documentation","i18n":"Documentation" ,"slug":"documentation","icon":"feather icon-folder"},
+  {"url":"https://pixinvent.ticksy.com/","name":"Raise Support", "i18n":"Raise Support" ,"slug":"support-raise-support","icon":"feather icon-life-buoy"}
+]}

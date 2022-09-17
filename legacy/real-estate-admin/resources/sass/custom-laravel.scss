@@ -1,0 +1,89 @@
+/*=========================================================================================
+    File Name: laravel-menu.scss
+    Description: laravel Specific menu styles
+    ----------------------------------------------------------------------------------------
+    Item name: Vuexy  - Vuejs, HTML & Laravel Admin Dashboard Template
+    Author: PIXINVENT
+    Author URL: http://www.themeforest.net/user/pixinvent
+==========================================================================================*/
+
+// Core variables and mixins
+@import "bootstrap/functions";
+@import "bootstrap/mixins";
+@import "bootstrap-extended/mixins";
+
+// Core variables and mixins overrides
+@import "core/variables/variables";
+@import "bootstrap/variables";
+
+// Overrides user variable
+@import "core/variables/components-variables";
+
+// Import first main menu mixin
+@import "core/mixins/main-menu-mixin";
+
+//  Vertical menu
+//=========================
+body.vertical-layout {
+   &.vertical-menu-modern {
+        .horizontal-menu-wrapper{
+            display: none;
+        }
+    }
+}
+
+// Horizontal Menu
+//=========================
+.horizontal-menu{
+    // Hide Vertical menu in Horizontal Layout in Laravel not in HTML
+	>.main-menu{
+		display: none;
+	}
+	.fixed-top{
+		left: 0;
+	}
+}
+
+// content style
+//=========================
+html body.navbar-static .app-content .header-navbar {
+    background: transparent;
+    box-shadow: none !important;
+}
+
+@include media-breakpoint-down(xs) {
+    // Vertical Layout
+    body.vertical-layout {
+        &:not(.horizontal-layout){
+            &.navbar-floating{
+                .header-navbar{
+                    margin-left: 1.2rem;
+                    margin-right: 1.2rem;
+                }
+            }
+        }
+    }
+ }
+
+ .loader {
+  border: 16px solid #f3f3f3; /* Light grey */
+  border-top: 16px solid #3498db; /* Blue */
+  border-radius: 50%;
+  width: 120px;
+  height: 120px;
+  margin: auto;
+  animation: spin 2s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.absolute-center {
+  display: flex;
+  background-color: white;
+  position: absolute;
+  z-index: 9999;
+  top: 0; left: 0; bottom: 0; right: 0;
+}
